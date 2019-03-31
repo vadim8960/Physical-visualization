@@ -8,10 +8,10 @@
 class Widget : public QOpenGLWidget
 {
 public:
-    Widget(QWidget *parent = NULL);
-    void initializeGL();
-    void resizeGL(int nWidth, int nHeight);
-    void paintGL();
+    Widget(QWidget *parent = nullptr);
+    void initializeGL() override;
+    void resizeGL(int nWidth, int nHeight) override;
+    void paintGL() override;
 };
 
 #endif // WIDGET_H

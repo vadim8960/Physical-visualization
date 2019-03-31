@@ -24,10 +24,10 @@ t = 0
 
 x = x0
 y = y0
-y = y0 + 1/2 * t * t * (9.8 * tan(asin(y)) / ((1 + 0.1*0.05) * (1 + 0.1 * tan(asin(y))))
-x = x0 + 1/2 * t * t * (9.8 / ((1 + 0.1*0.05) * (1 + 0.1 * tan(acos(x))) ) )
 
 while y >= 0:
+	y = y0 + 1/2 * t * t * (9.8 * tan(asin(y)) / ((1 + 0.1*0.05) * (1 + 0.1 * tan(asin(y))))
+	x = x0 + 1/2 * t * t * (9.8 / ((1 + 0.1*0.05) * (1 + 0.1 * tan(acos(x))) ) )
 	axes.plot([x, 0], [0, y])
 	plt.draw()
 	plt.pause(0.1)

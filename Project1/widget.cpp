@@ -8,13 +8,8 @@ Widget::Widget(QWidget *parent)
 
 void Widget::initializeGL()
 {
-    //qglClearColor(Qt::white); // заполняем экран белым цветом
-    //glClearColor(Qt::white);
-    glClearColor(225, 225, 225, 1);
-    glEnable(GL_DEPTH_TEST); // задаем глубину проверки пикселей
-    glShadeModel(GL_FLAT); // убираем режим сглаживания цветов
-    glEnable(GL_CULL_FACE); // говорим, что будем строить только внешние поверхности
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); // фигуры будут закрашены с обеих сторон
+//    glClearColor(QColor(255, 255, 255));
+    glClearColor(252, 255, 255, 1);
     qDebug() << "Init";
 }
 
@@ -31,6 +26,8 @@ void Widget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
     glMatrixMode(GL_MODELVIEW); // задаем модельно-видовую матрицу
     glLoadIdentity();           // загрузка единичную матрицу
+//    glColor(QColor(0, 0, 0));
+    glColor3b(152, 152, 152);
     glBegin(GL_QUADS); // говорим, что рисовать будем прямоугольник
        // задаем вершины многоугольника
        glVertex3f(0.5, 0.5, 0.5);
@@ -39,4 +36,5 @@ void Widget::paintGL()
        glVertex3f(0.5, -0.5, 0.5);
     glEnd();
     qDebug() << "Paint";
+
 }

@@ -146,6 +146,9 @@
     </property>
    </widget>
    <widget class="QOpenGLWidget" name="gr_window">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>

@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     Widget wid(ui->gr_window);
-    wid.initializeGL();
-    wid.resizeGL(1000, 1000);
+    wid.resizeGL(100, 100);
     wid.paintGL();
+    ui->gr_window->show();
 }
 
 MainWindow::~MainWindow()

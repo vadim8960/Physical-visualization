@@ -1,15 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-03-31T13:22:24
+# Project created by QtCreator 2019-04-01T16:20:32
 #
 #-------------------------------------------------
 
 QT       += core gui
-QT += opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Project1
+TARGET = Project2
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -27,14 +26,10 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    widget.cpp \
-    qlwidget.cpp
+        mainwindow.cpp
 
 HEADERS += \
-        mainwindow.h \
-    widget.h \
-    qlwidget.h
+        mainwindow.h
 
 FORMS += \
         mainwindow.ui

@@ -9,9 +9,9 @@ class Widget : public QOpenGLWidget
 {
 public:
     Widget(QWidget *parent = nullptr);
-    void initializeGL() override;
-    void resizeGL(int nWidth, int nHeight) override;
-    void paintGL() override;
+    virtual void initializeGL() override;
+    virtual void resizeGL(int nWidth, int nHeight) override;
+    virtual void paintGL() override;
 };
 
 #endif // WIDGET_H

@@ -5,7 +5,7 @@ Widget::Widget(QWidget *parent)
 
 void Widget::initializeGL()
 {
-    glClearColor(252, 255, 255, 1);
+    glClearColor(0, 255, 255, 1);
     qDebug() << "Init";
 }
 
@@ -22,8 +22,7 @@ void Widget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
     glMatrixMode(GL_MODELVIEW); // задаем модельно-видовую матрицу
     glLoadIdentity();           // загрузка единичную матрицу
-    glColor3i(152, 152, 152);
-    glRecti(1, 1, 3, 3);
+
     qDebug() << "Paint";
 
 }

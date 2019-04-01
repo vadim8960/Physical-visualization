@@ -145,21 +145,16 @@
      <string>Freeze</string>
     </property>
    </widget>
-   <widget class="glwidget" name="gr_window">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>30</x>
       <y>30</y>
-      <width>481</width>
-      <height>401</height>
+      <width>491</width>
+      <height>391</height>
      </rect>
     </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
-    </property>
+    <layout class="QVBoxLayout" name="graphic_layout"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -183,13 +178,6 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>glwidget</class>
-   <extends>QOpenGLWidget</extends>
-   <header location="global">glwidget.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

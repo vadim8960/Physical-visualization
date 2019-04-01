@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 
 #include "widget.h"
-#include "qlwidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,11 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qlwidget ww(ui->gr_window);
-    ww.paintGL();
-    ww.show();
+    Widget* wid = new Widget;
 
+    ui->graphic_layout->addWidget(wid);
 
+    wid->paintGL();
 }
 
 MainWindow::~MainWindow()

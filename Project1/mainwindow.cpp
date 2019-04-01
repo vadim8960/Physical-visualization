@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphic_layout->addWidget(simulation);
 
-    simulation->resizeGL(10, 10);
+    simulation->resizeGL(300, 300);
 
     simulation->paintGL();
 }

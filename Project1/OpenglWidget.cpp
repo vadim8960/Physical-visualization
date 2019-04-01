@@ -3,34 +3,28 @@
 OpenglWidget::OpenglWidget(QWidget *parent)
     : QOpenGLWidget (parent) {  }
 
-void OpenglWidget::initializeGL()
-{
+void OpenglWidget::initializeGL() {
     glClearColor(255, 255, 255, 1);
 }
 
-void OpenglWidget::resizeGL(int w, int h)
-{
+void OpenglWidget::resizeGL(int w, int h) {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 }
 
-void OpenglWidget::paintGL()
-{
+void OpenglWidget::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+
+
     x = -0.5;
     y = -0.5;
 
-    glColor3i(1, 0, 0);
-    glLineWidth(2.5);
+    draw_grid();
 
-    glBegin(GL_LINES);
-        glVertex2d(-1, 0.5);
-        glVertex2d(1, 0.5);
-    glEnd();
 //    glBegin(GL_LINES);
 //      glVertex2f(0.5f, 0.5f);
 //      glVertex2f(-0.5f, 0.5f);
@@ -53,4 +47,31 @@ bool OpenglWidget::setParams(double m1, double m2, double angle) {
         return true;
     }
     return false;
+}
+
+void OpenglWidget::draw_grid() {
+    glColor3i(0, 0, 0);
+    glLineWidth(3);
+    glBegin(GL_LINES);
+        glVertex2d(-0.8, 1);
+        glVertex2d(-0.8, -0.8);
+        glVertex2d(-0.8, -0.8);
+        glVertex2d(1, -0.8);
+    glEnd();
+}
+
+void OpenglWidget::clean() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+void OpenglWidget::draw_line() {
+    glColor3i(0, 0, 0);
+    glLineWidth(3);
+
+    glBegin(GL_LINES);
+        glVertex2d(x, 0.5);
+        glVertex2d(1, y);
+    glEnd();
 }

@@ -10,10 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
     simulation = new OpenglWidget;
 
     ui->graphic_layout->addWidget(simulation);
-
-    simulation->resizeGL(300, 300);
-
-    simulation->paintGL();
 }
 
 MainWindow::~MainWindow()
@@ -27,5 +23,6 @@ void MainWindow::on_btn_start_clicked()
     simulation->setParams(ui->lbl_m1->text().toDouble(),
                           ui->lbl_m2->text().toDouble(),
                           ui->lbl_angle->text().toDouble());
+//    simulation->paintGL();
 
 }

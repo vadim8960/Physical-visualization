@@ -86,7 +86,7 @@ public:
         btn_freeze->setGeometry(QRect(630, 310, 111, 51));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(30, 30, 491, 391));
+        verticalLayoutWidget->setGeometry(QRect(30, 30, 441, 391));
         graphic_layout = new QVBoxLayout(verticalLayoutWidget);
         graphic_layout->setSpacing(6);
         graphic_layout->setContentsMargins(11, 11, 11, 11);

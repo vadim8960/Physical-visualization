@@ -5,6 +5,9 @@ OpenglWidget::OpenglWidget(QWidget *parent)
 
 void OpenglWidget::initializeGL() {
     glClearColor(255, 255, 255, 1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 }
 
 void OpenglWidget::resizeGL(int w, int h) {
@@ -14,23 +17,7 @@ void OpenglWidget::resizeGL(int w, int h) {
 }
 
 void OpenglWidget::paintGL() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-
-
-    x = -0.5;
-    y = -0.5;
-
-    draw_grid();
-
-//    glBegin(GL_LINES);
-//      glVertex2f(0.5f, 0.5f);
-//      glVertex2f(-0.5f, 0.5f);
-//      glVertex2f(-0.5f, -0.5f);
-//      glVertex2f(0.5f, -0.5f);
-//    glEnd();
+    startAnimation();
 }
 
 bool OpenglWidget::check_enter_data(double m1, double m2, double angle) {
@@ -50,13 +37,21 @@ bool OpenglWidget::setParams(double m1, double m2, double angle) {
 }
 
 void OpenglWidget::draw_grid() {
-    glColor3i(0, 0, 0);
-    glLineWidth(3);
+    glLineWidth(2.5);
     glBegin(GL_LINES);
-        glVertex2d(-0.8, 1);
+        glColor3d(0, 0, 0);
+        glVertex2d(-0.8, 0.95);
         glVertex2d(-0.8, -0.8);
         glVertex2d(-0.8, -0.8);
-        glVertex2d(1, -0.8);
+        glVertex2d(0.95, -0.8);
+        for (double iter_y = -0.8; iter_y < 0.95; iter_y += 0.1) {
+            glVertex2d(-0.8, iter_y);
+            glVertex2d( -0.9, iter_y - 0.1);
+        }
+        for (double iter_x = -0.7; iter_x < 0.95; iter_x += 0.1) {
+            glVertex2d(iter_x, -0.8);
+            glVertex2d(iter_x - 0.1, -0.9);
+        }
     glEnd();
 }
 
@@ -66,12 +61,41 @@ void OpenglWidget::clean() {
     glLoadIdentity();
 }
 
-void OpenglWidget::draw_line() {
-    glColor3i(0, 0, 0);
+void OpenglWidget::draw_line(bool status) {
+    double tmp_x = (status) ? x : x_l;
+    double tmp_y = (status) ? y : y_l;
     glLineWidth(3);
-
     glBegin(GL_LINES);
-        glVertex2d(x, 0.5);
-        glVertex2d(1, y);
+        glColor3d(status, 0, 0);
+        glVertex2d(tmp_x - bias, -bias);
+        glVertex2d(-bias, tmp_y - bias);
     glEnd();
+}
+
+void OpenglWidget::delay( int millisecondsToWait )
+{
+    QTime dieTime = QTime::currentTime().addMSecs( millisecondsToWait );
+    while( QTime::currentTime() < dieTime )
+    {
+        QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+    }
+}
+
+void OpenglWidget::startAnimation() {
+    clean();
+    draw_grid();
+    double t = 0;
+    while (y > -bias) {
+        draw_line(true);
+        angle = qAtan(y / x);
+        double ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+        double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+        x = x0 + 1/2 * ax * t * t;
+        y = y0 + 1/2 * ay * t * t;
+        delay(10);
+        t += 0.1;
+        draw_line(false);
+        x_l = x;
+        y_l = y;
+    }
 }

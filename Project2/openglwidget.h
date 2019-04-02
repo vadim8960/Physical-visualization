@@ -3,6 +3,8 @@
 
 #include <QOpenGLWidget>
 #include <QGLWidget>
+#include <QDebug>
+#include <QtMath>
 
 #define bias 0.79
 #define g    9.8
@@ -33,6 +35,7 @@ public:
 
 private:
     double x0, y0;
+    double x, y;
     double m1, m2;
     double angle;
 
@@ -40,7 +43,7 @@ private:
 
     void draw_grid();
     void clean();
-    void draw_line(bool status);
+    void draw_line();
 };
 
 #endif // OPENGLWIDGET_H

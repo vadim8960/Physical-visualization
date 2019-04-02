@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "openglwidget.h"
 
+#include <QtMath>
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,9 +18,12 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_btn_show_clicked();
+
 private:
     Ui::MainWindow *ui;
-    OpenglWidget *simualtion;
+    OpenglWidget *simulation;
 };
 
 #endif // MAINWINDOW_H

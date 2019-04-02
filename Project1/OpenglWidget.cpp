@@ -32,7 +32,7 @@ void OpenglWidget::paintGL() {
 
 bool OpenglWidget::check_enter_data(double m1, double m2, double angle) {
     qDebug() << atan(0.5/m2 - m1) << " " << angle;
-    return atan(0.5/m2 - m1) > angle;
+    return qAtan(0.5/m2 - m1) > angle;
 }
 
 bool OpenglWidget::setParams(double m1, double m2, double angle) {

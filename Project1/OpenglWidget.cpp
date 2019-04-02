@@ -69,18 +69,18 @@ void OpenglWidget::draw_grid() {
 }
 
 void OpenglWidget::clean() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    draw_line(false);
+//    glMatrixMode(GL_PROJECTION);
+//    glLoadIdentity();
 }
 
 void OpenglWidget::draw_line(bool status) {
     double tmp_x = (status) ? x : x_l;
     double tmp_y = (status) ? y : y_l;
-    glLineWidth(3);
+    glLineWidth(2.5);
     glBegin(GL_LINES);
         glMatrixMode(GL_COLOR);
-        glColor3d(1, 0, 0);
+        glColor3d(status, 0, 0);
         glMatrixMode(GL_MODELVIEW);
         glVertex2d(tmp_x - bias, -bias);
         glVertex2d(-bias, tmp_y - bias);
@@ -122,7 +122,7 @@ void OpenglWidget::startMain() {
 
 void OpenglWidget::startShowChange() {
     clean();
-    draw_grid();
+//    draw_grid();
     draw_line(true);
 }
 

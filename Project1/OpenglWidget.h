@@ -28,6 +28,7 @@ public:
     void startMain();
     void startShowChange();
     void setStatusPainter(int status);
+    int  getStatus();
 
     void initializeGL() override;
     void resizeGL(int nWidth, int nHeight) override;

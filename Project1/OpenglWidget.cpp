@@ -121,11 +121,15 @@ void OpenglWidget::startMain() {
 }
 
 void OpenglWidget::startShowChange() {
-    clean();
+//    clean();
 //    draw_grid();
     draw_line(true);
 }
 
 void OpenglWidget::setStatusPainter(int status) {
     this->status = status;
+}
+
+int OpenglWidget::getStatus() {
+    return status;
 }

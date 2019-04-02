@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -52,4 +50,5 @@ void MainWindow::on_btn_show_clicked()
         simulation->setStatusPainter(SHOW_CHANGE);
         simulation->paintGL();
     }
+    qDebug() << simulation->getStatus();
 }

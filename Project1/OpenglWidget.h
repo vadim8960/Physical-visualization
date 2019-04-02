@@ -12,6 +12,12 @@
 #define bias 0.79
 #define g    9.8
 
+enum {
+    ANIMATION,
+    DRAW_MAIN,
+    SHOW_CHANGE
+};
+
 class OpenglWidget : public QOpenGLWidget
 {
 public:
@@ -19,6 +25,9 @@ public:
 
     bool setParams(double m1, double m2, double angle);
     void startAnimation();
+    void startMain();
+    void startShowChange();
+    void setStatusPainter(int status);
 
     void initializeGL() override;
     void resizeGL(int nWidth, int nHeight) override;
@@ -30,6 +39,8 @@ private:
     double angle;
     double x, y;
     double x_l, y_l;
+
+    int status;
 
     bool check_enter_data(double m1, double m2, double angle);
     void delay(int millisecondsToWait);

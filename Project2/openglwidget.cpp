@@ -54,20 +54,6 @@ unsigned OpenglWidget::getStatus() {
     return status;
 }
 
-void OpenglWidget::startAnimation() {
-
-}
-
-void OpenglWidget::startMain() {
-    draw_grid();
-}
-
-void OpenglWidget::startShowChange() {
-//    clean();
-    draw_grid();
-    draw_line();
-}
-
 /////////////////////////////////////////////////////
 ////           Begin private block               ////
 /////////////////////////////////////////////////////
@@ -105,4 +91,40 @@ void OpenglWidget::draw_line() {
         glVertex2d(x - bias, -bias);
         glVertex2d(-bias, y - bias);
     glEnd();
+}
+
+void OpenglWidget::startAnimation() {
+    draw_grid();
+    double t = 0, _x = x, _y = y;
+    while (_y > 0) {
+        angle = qAtan(_y / _x);
+        double ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+        double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+        _x += (1/2 * ax * t * t);
+        _y -= (1/2 * ay * t * t);
+        qDebug() << _x << " " << _y << " " << t << " " << ax << " " << ay;
+        delay(100);
+        t += 0.01;
+        draw_line();
+        update();
+    }
+}
+
+void OpenglWidget::startMain() {
+    draw_grid();
+    update();
+}
+
+void OpenglWidget::startShowChange() {
+    clean();
+    draw_grid();
+    draw_line();
+    update();
+}
+
+void OpenglWidget::delay(int msec) {
+    QTime *t = new QTime;
+    t->start();
+    while (t->elapsed() < msec);
+    delete t;
 }

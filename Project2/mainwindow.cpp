@@ -19,11 +19,46 @@ MainWindow::~MainWindow()
     delete simulation;
 }
 
+void MainWindow::show_message(bool res, QString msg) {
+    if (res) {
+        ui->lbl_error->clear();
+    } else {
+        ui->lbl_error->setText(msg);
+    }
+}
+
+bool MainWindow::check_is_empty() {
+    return ui->lineEdit_m1->text().isEmpty() ||
+           ui->lineEdit_m2->text().isEmpty() ||
+           ui->lineEdit_angle->text().isEmpty();
+}
+
 void MainWindow::on_btn_show_clicked() {
-    bool res = simulation->setParams(ui->lineEdit_m1->text().toDouble(),
-                                     ui->lineEdit_m1->text().toDouble(),
-                                     qDegreesToRadians(ui->lineEdit_angle->text().toDouble()));
-    ui->lbl_error->setText(QString( (res) ? "TRUE" : "FALSE" ));
-    simulation->setStatusPainter(SHOW_CHANGE);
-    simulation->update();
+    if (check_is_empty()) {
+        show_message(false, QString("Please, enter all variable"));
+    } else {
+        bool res = simulation->setParams(ui->lineEdit_m1->text().toDouble(),
+                                         ui->lineEdit_m1->text().toDouble(),
+                                         qDegreesToRadians(ui->lineEdit_angle->text().toDouble()));
+        show_message(res);
+        if (res)
+            simulation->setStatusPainter(SHOW_CHANGE);
+        else
+            show_message(res, QString("Very big angle for this m1 and m2"));
+    }
+}
+
+void MainWindow::on_btn_start_clicked() {
+    if (check_is_empty()) {
+        show_message(false, QString("Please, enter all variable"));
+    } else {
+        bool res = simulation->setParams(ui->lineEdit_m1->text().toDouble(),
+                                         ui->lineEdit_m1->text().toDouble(),
+                                         qDegreesToRadians(ui->lineEdit_angle->text().toDouble()));
+        show_message(res);
+        if (res)
+            simulation->setStatusPainter(ANIMATION);
+        else
+            show_message(res, QString("Very big angle for this m1 and m2"));
+    }
 }

@@ -5,6 +5,8 @@
 #include <QGLWidget>
 #include <QDebug>
 #include <QtMath>
+#include <QTime>
+
 
 #define bias 0.79
 #define g    9.8
@@ -29,10 +31,6 @@ public:
     void setStatusPainter(unsigned status);
     unsigned getStatus();
 
-    void startAnimation();
-    void startMain();
-    void startShowChange();
-
 private:
     double x0, y0;
     double x, y;
@@ -41,9 +39,15 @@ private:
 
     unsigned status;
 
+    void startAnimation();
+    void startMain();
+    void startShowChange();
+
     void draw_grid();
     void clean();
     void draw_line();
+
+    void delay(int msec);
 };
 
 #endif // OPENGLWIDGET_H

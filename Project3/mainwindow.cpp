@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(764, 486);
     simulation = new OpenglWidget;
+    timer = new QTimer();
+    timer->setInterval(100);
     simulation->setFixedSize(380, 380);
     ui->grlayout->addWidget(simulation);
     simulation->setStatusPainter(DRAW_MAIN);
@@ -60,11 +62,13 @@ void MainWindow::on_btn_start_clicked() {
                                          ui->lineEdit_m1->text().toDouble(),
                                          qDegreesToRadians(ui->lineEdit_angle->text().toDouble()));
         show_message(res);
-        if (res)
+        if (res) {
             simulation->setStatusPainter(ANIMATION);
-        else
+            timer->start(100);
+            connect(timer, &QTimer::timeout,
+                    simulation, &OpenglWidget::changeParameters);
+        } else
             show_message(res, QString("Very big angle for this m1 and m2"));
     }
-    timer->setInterval(45);
-    connect(timer, &QTimer::timeout, this, &MainWindow::start_timer);
+
 }

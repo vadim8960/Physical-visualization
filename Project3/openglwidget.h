@@ -39,7 +39,7 @@ public:
 signals:
     void startChange();
 
-private slots:
+public slots:
     void changeParameters();
 
 private:

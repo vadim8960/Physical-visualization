@@ -3,7 +3,6 @@
 OpenglWidget::OpenglWidget()
 {
     status = 1;
-    connect(this, &OpenglWidget::startChange, this, &OpenglWidget::changeParameters);
 }
 
 /////////////////////////////////////////////////////

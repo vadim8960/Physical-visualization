@@ -2,10 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPushButton>
-#include <QMessageBox>
-#include <QLabel>
-#include <QLineEdit>
+#include "openglwidget.h"
+
+#include <QThread>
+#include <QtMath>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -19,14 +20,20 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-signals:
-    void buttonIsPressed();
-
 private slots:
-    void printVariable(int var);
+    void on_btn_show_clicked();
+
+    void on_btn_start_clicked();
+
+    void start_timer();
 
 private:
     Ui::MainWindow *ui;
+    OpenglWidget *simulation;
+    QTimer *timer;
+
+    void show_message(bool res, QString msg = "");
+    bool check_is_empty();
 };
 
 #endif // MAINWINDOW_H

@@ -13,10 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QLabel *label = new QLabel;
     label->setText(QString("Text"));
 
+    QLineEdit *lineEdit = new QLineEdit;
+
+    ui->verticalLayout->addWidget(lineEdit);
     ui->verticalLayout->addWidget(button);
     ui->verticalLayout->addWidget(label);
-    connect(button, &QPushButton::clicked, this,
-            &MainWindow::showMessage);
 
 }
 

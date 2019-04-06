@@ -33,7 +33,6 @@ public:
 
     bool setParams(double m1, double m2, double angle);
 
-    void setStatusPainter(unsigned status);
     unsigned getStatus();
 
 signals:
@@ -41,6 +40,7 @@ signals:
 
 public slots:
     void changeParameters();
+    void setStatusPainter(unsigned status);
 
 private:
     double x0, y0;

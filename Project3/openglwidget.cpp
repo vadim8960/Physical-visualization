@@ -47,6 +47,8 @@ bool OpenglWidget::setParams(double m1, double m2, double angle) {
 
 void OpenglWidget::setStatusPainter(unsigned status) {
     this->status = status;
+    if (status == ANIMATION)
+        changeParameters();
 }
 
 unsigned OpenglWidget::getStatus() {
@@ -54,14 +56,15 @@ unsigned OpenglWidget::getStatus() {
 }
 
 void OpenglWidget::changeParameters() {
-    qDebug() << "Start change parameters";
+    t += 0.01;
     angle = qAtan(y / x);
     double ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
     double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
-    x += (1/2 * ax * t * t);
-    y -= (1/2 * ay * t * t);
+//    x += (1/2 * ax * t * t);
+//    y += (1/2 * ay * t * t);
+    x += 0.1;
+    y += 0.1;
     qDebug() << x << " " << y << " " << t << " " << ax << " " << ay;
-    t += 0.01;
 }
 
 /////////////////////////////////////////////////////
@@ -104,7 +107,6 @@ void OpenglWidget::draw_line() {
 }
 
 void OpenglWidget::startAnimation() {
-    qDebug() << "Start animation";
     startShowChange();
 }
 

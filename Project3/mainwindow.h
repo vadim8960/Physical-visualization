@@ -20,6 +20,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void status(unsigned st);
+
 private slots:
     void on_btn_show_clicked();
 

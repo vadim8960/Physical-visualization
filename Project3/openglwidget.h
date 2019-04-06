@@ -37,6 +37,7 @@ public:
 
 signals:
     void startChange();
+    void stop_timer();
 
 public slots:
     void changeParameters();

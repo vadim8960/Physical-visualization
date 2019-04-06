@@ -56,15 +56,16 @@ unsigned OpenglWidget::getStatus() {
 }
 
 void OpenglWidget::changeParameters() {
-    t += 0.01;
+    t += 0.001;
     angle = qAtan(y / x);
     double ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
     double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
-//    x += (1/2 * ax * t * t);
-//    y += (1/2 * ay * t * t);
-    x += 0.1;
-    y += 0.1;
-    qDebug() << x << " " << y << " " << t << " " << ax << " " << ay;
+    x += ((ax * t * t) / 2);
+    y -= ((ay * t * t) / 2);
+    if (y <= 0) {
+        emit stop_timer();
+        t = 0;
+    }
 }
 
 /////////////////////////////////////////////////////

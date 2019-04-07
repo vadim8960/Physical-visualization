@@ -1,16 +1,11 @@
 #ifndef OPENGLWIDGET_H
 #define OPENGLWIDGET_H
 
-#include <QOpenGLWidget>
-#include <QGLWidget>
-#include <QDebug>
-#include <QtMath>
 #include <QTime>
-#include <QObject>
+#include <QtMath>
+#include <QOpenGLWidget>
 
-#include <QtConcurrent>
-#include <QFuture>
-#include <QThreadPool>
+#include <QDebug>
 
 #define bias 0.79
 #define g    9.8
@@ -28,19 +23,14 @@ public:
     OpenglWidget();
 
     void initializeGL() override;
-    void resizeGL(int w, int h) override;
     void paintGL() override;
 
     bool setParams(double m1, double m2, double angle);
 
-    unsigned getStatus();
-
 signals:
-    void startChange();
     void stop_timer();
 
 public slots:
-    void changeParameters();
     void setStatusPainter(unsigned status);
 
 private:
@@ -60,7 +50,7 @@ private:
     void clean();
     void draw_line();
 
-    void delay(int msec);
+    void change_parameters();
 };
 
 #endif // OPENGLWIDGET_H

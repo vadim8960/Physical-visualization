@@ -1,7 +1,6 @@
 #include "openglwidget.h"
 
-OpenglWidget::OpenglWidget()
-{
+OpenglWidget::OpenglWidget() {
     status = 1;
 }
 
@@ -12,10 +11,6 @@ OpenglWidget::OpenglWidget()
 void OpenglWidget::initializeGL() {
     glClearColor(1, 1, 1, 1);
     glEnable(GL_SMOOTH);
-}
-
-void OpenglWidget::resizeGL(int w, int h) {
-
 }
 
 extern void OpenglWidget::paintGL() {
@@ -45,27 +40,14 @@ bool OpenglWidget::setParams(double m1, double m2, double angle) {
     return false;
 }
 
+/////////////////////////////////////////////////////
+////           Begin slots block                 ////
+/////////////////////////////////////////////////////
+
 void OpenglWidget::setStatusPainter(unsigned status) {
     this->status = status;
     if (status == ANIMATION)
-        changeParameters();
-}
-
-unsigned OpenglWidget::getStatus() {
-    return status;
-}
-
-void OpenglWidget::changeParameters() {
-    t += 0.001;
-    angle = qAtan(y / x);
-    double ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
-    double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
-    x += ((ax * t * t) / 2);
-    y -= ((ay * t * t) / 2);
-    if (y <= 0) {
-        emit stop_timer();
-        t = 0;
-    }
+        change_parameters();
 }
 
 /////////////////////////////////////////////////////
@@ -121,4 +103,18 @@ void OpenglWidget::startShowChange() {
     draw_grid();
     draw_line();
     update();
+}
+
+void OpenglWidget::change_parameters() {
+    t += 0.001;
+    angle = qAtan(y / x);
+    double ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+    double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+    x += ((ax * t * t) / 2);
+    y -= ((ay * t * t) / 2);
+    if (y <= 0) {
+        y = 0;
+        t = 0;
+        emit stop_timer();
+    }
 }

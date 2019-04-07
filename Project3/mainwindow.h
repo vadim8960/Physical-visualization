@@ -4,8 +4,6 @@
 #include <QMainWindow>
 #include "openglwidget.h"
 
-#include <QThread>
-#include <QtMath>
 #include <QTimer>
 
 namespace Ui {

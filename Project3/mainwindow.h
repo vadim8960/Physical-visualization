@@ -23,9 +23,7 @@ signals:
 
 private slots:
     void on_btn_show_clicked();
-
     void on_btn_start_clicked();
-
     void start_timer();
 
 private:
@@ -33,7 +31,7 @@ private:
     OpenglWidget *simulation;
     QTimer *timer;
 
-    void show_message(bool res, QString msg = "");
+    void show_message(QString msg = "");
     bool check_is_empty();
 };
 

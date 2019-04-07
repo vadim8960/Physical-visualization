@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-/**/
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -23,14 +21,15 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete simulation;
+    delete timer;
 }
 
-void MainWindow::show_message(bool res, QString msg) {
-    if (res) {
-        ui->lbl_error->clear();
-    } else {
-        ui->lbl_error->setText(msg);
-    }
+/////////////////////////////////////////////////////
+////           Begin private block               ////
+/////////////////////////////////////////////////////
+
+void MainWindow::show_message(QString msg) {
+    ui->lbl_error->setText(msg);
 }
 
 bool MainWindow::check_is_empty() {
@@ -39,33 +38,33 @@ bool MainWindow::check_is_empty() {
            ui->lineEdit_angle->text().isEmpty();
 }
 
+/////////////////////////////////////////////////////
+////           Begin slots block                 ////
+/////////////////////////////////////////////////////
+
 void MainWindow::on_btn_show_clicked() {
     if (check_is_empty()) {
-        show_message(false, QString("Please, enter all variable"));
+        show_message(QString("Please, enter all variable"));
     } else {
         bool res = simulation->setParams(ui->lineEdit_m1->text().toDouble(),
                                          ui->lineEdit_m1->text().toDouble(),
                                          qDegreesToRadians(ui->lineEdit_angle->text().toDouble()));
-        show_message(res);
+        show_message(QString(""));
         if (res)
             simulation->setStatusPainter(SHOW_CHANGE);
         else
-            show_message(res, QString("Very big angle for this m1 and m2"));
+            show_message(QString("Very big angle for this m1 and m2"));
     }
-}
-
-void MainWindow::start_timer() {
-    emit status(ANIMATION);
 }
 
 void MainWindow::on_btn_start_clicked() {
     if (check_is_empty()) {
-        show_message(false, QString("Please, enter all variable"));
+        show_message(QString("Please, enter all variable"));
     } else {
         bool res = simulation->setParams(ui->lineEdit_m1->text().toDouble(),
                                          ui->lineEdit_m1->text().toDouble(),
                                          qDegreesToRadians(ui->lineEdit_angle->text().toDouble()));
-        show_message(res);
+        show_message(QString(""));
         if (res) {
             simulation->setStatusPainter(ANIMATION);
             timer->start(10);
@@ -74,6 +73,10 @@ void MainWindow::on_btn_start_clicked() {
             connect(this, &MainWindow::status,
                     simulation, &OpenglWidget::setStatusPainter);
         } else
-            show_message(res, QString("Very big angle for this m1 and m2"));
+            show_message(QString("Very big angle for this m1 and m2"));
     }
+}
+
+void MainWindow::start_timer() {
+    emit status(ANIMATION);
 }

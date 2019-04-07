@@ -19,6 +19,7 @@ enum {
 class OpenglWidget : public QOpenGLWidget
 {
     Q_OBJECT
+
 public:
     OpenglWidget();
 

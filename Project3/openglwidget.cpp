@@ -112,6 +112,7 @@ void OpenglWidget::change_parameters() {
     double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
     x += ((ax * t * t) / 2);
     y -= ((ay * t * t) / 2);
+    qDebug() << ax << " " << ay << " " << x << " " << y << " " << t;
     if (y <= 0) {
         y = 0;
         t = 0;

@@ -8,13 +8,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(764, 486);
     simulation = new OpenglWidget;
-    timer = new QTimer;
-    timer->setInterval(100);
+    timer = new QTimer(this);
+    timer->setSingleShot(false);
+    timer->setInterval(10);
     simulation->setFixedSize(380, 380);
     ui->grlayout->addWidget(simulation);
     simulation->setStatusPainter(DRAW_MAIN);
     connect(simulation, &OpenglWidget::stop_timer,
             timer, &QTimer::stop);
+    connect(timer, &QTimer::timeout,
+            this, &MainWindow::start_timer);
+    connect(this, &MainWindow::status,
+            simulation, &OpenglWidget::setStatusPainter);
 }
 
 MainWindow::~MainWindow()
@@ -67,11 +72,7 @@ void MainWindow::on_btn_start_clicked() {
         show_message(QString(""));
         if (res) {
             simulation->setStatusPainter(ANIMATION);
-            timer->start(10);
-            connect(timer, &QTimer::timeout,
-                    this, &MainWindow::start_timer);
-            connect(this, &MainWindow::status,
-                    simulation, &OpenglWidget::setStatusPainter);
+            timer->start();
         } else
             show_message(QString("Very big angle for this m1 and m2"));
     }

@@ -76,7 +76,6 @@ void MainWindow::on_btn_start_clicked() {
         if (res) {
             simulation->setStatusPainter(ANIMATION);
             timer->start();
-//            ui->btn_show->setEnabled(false);
         } else
             show_message(QString("Very big angle for this m1 and m2"));
     }
@@ -102,14 +101,13 @@ void MainWindow::on_btn_freeze_clicked() {
         status_button = CONTINUE;
         timer->start();
     break;
+    case WAIT:
+        status_button = CONTINUE;
+    [[clang::fallthrough]];
     case CONTINUE:
         ui->btn_freeze->setText(QString("Continue"));
         timer->stop();
         status_button = FREEZE;
     break;
-    case WAIT:
-        status_button = FREEZE;
-    break;
     }
-
 }

@@ -46,10 +46,10 @@ bool OpenglWidget::setParams(double m1, double m2, double angle) {
 
 QString OpenglWidget::getParams() {
     QString res = "";
-    res += ("time = " + QString::number(t) + ", ");
-    res += ("angle = " + QString::number(qRadiansToDegrees(qAtan(y/x))) + ", ");
-    res += ("vx = " + QString::number(ax * t) + ", ");
-    res += ("vy = " + QString::number(ay * t));
+    res += ("time = " + QString::number(t, 'd', 3) + ", ");
+    res += ("angle = " + QString::number(qRadiansToDegrees(qAtan(y/x)), 'd', 3) + ", ");
+    res += ("vx = " + QString::number(ax * t, 'd', 3) + ", ");
+    res += ("vy = " + QString::number(ay * t, 'd', 3));
     qDebug() << res;
     return res;
 }

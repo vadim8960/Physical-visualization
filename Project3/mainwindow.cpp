@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    status_button = WAIT;
     this->setFixedSize(764, 486);
     simulation = new OpenglWidget;
     timer = new QTimer(this);
@@ -73,6 +74,7 @@ void MainWindow::on_btn_start_clicked() {
         if (res) {
             simulation->setStatusPainter(ANIMATION);
             timer->start();
+//            ui->btn_show->setEnabled(false);
         } else
             show_message(QString("Very big angle for this m1 and m2"));
     }
@@ -80,4 +82,28 @@ void MainWindow::on_btn_start_clicked() {
 
 void MainWindow::start_timer() {
     emit status(ANIMATION);
+}
+
+void MainWindow::on_btn_stop_clicked() {
+    simulation->setStatusPainter(STOP_SIMULATION);
+    timer->stop();
+}
+
+void MainWindow::on_btn_freeze_clicked() {
+    switch (status_button) {
+    case FREEZE:
+        ui->btn_freeze->setText(QString("Freeze"));
+        status_button = CONTINUE;
+        timer->start();
+    break;
+    case CONTINUE:
+        ui->btn_freeze->setText(QString("Continue"));
+        timer->stop();
+        status_button = FREEZE;
+    break;
+    case WAIT:
+        status_button = FREEZE;
+    break;
+    }
+
 }

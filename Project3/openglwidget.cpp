@@ -25,6 +25,9 @@ extern void OpenglWidget::paintGL() {
     case 2:
         startShowChange();
     break;
+    case 3:
+        stopAnimation();
+    break;
     }
 }
 
@@ -103,6 +106,13 @@ void OpenglWidget::startShowChange() {
     draw_grid();
     draw_line();
     update();
+}
+
+void OpenglWidget::stopAnimation() {
+    x = x0;
+    y = y0;
+    t = 0;
+    startShowChange();
 }
 
 void OpenglWidget::change_parameters() {

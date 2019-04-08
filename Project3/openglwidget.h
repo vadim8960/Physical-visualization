@@ -13,7 +13,8 @@
 enum {
     ANIMATION,
     DRAW_MAIN,
-    SHOW_CHANGE
+    SHOW_CHANGE,
+    STOP_SIMULATION
 };
 
 class OpenglWidget : public QOpenGLWidget
@@ -46,6 +47,7 @@ private:
     void startAnimation();
     void startMain();
     void startShowChange();
+    void stopAnimation();
 
     void draw_grid();
     void clean();

@@ -28,6 +28,7 @@ public:
     void paintGL() override;
 
     bool setParams(double m1, double m2, double angle);
+    QString getParams();
 
 signals:
     void stop_timer();
@@ -38,6 +39,7 @@ public slots:
 private:
     double x0, y0;
     double x, y;
+    double ax, ay;
     double m1, m2;
     double angle;
     double t;

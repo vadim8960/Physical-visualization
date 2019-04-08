@@ -33,6 +33,7 @@ private slots:
     void on_btn_stop_clicked();
     void on_btn_freeze_clicked();
     void start_timer();
+    void show_params();
 
 private:
     Ui::MainWindow *ui;

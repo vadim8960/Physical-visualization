@@ -38,9 +38,20 @@ bool OpenglWidget::setParams(double m1, double m2, double angle) {
         this->angle = angle;
         x = x0 = static_cast <double> (qCos(angle));
         y = y0 = static_cast <double> (qSin(angle));
+        t = 0;
         return true;
     }
     return false;
+}
+
+QString OpenglWidget::getParams() {
+    QString res = "";
+    res += ("time = " + QString::number(t) + ", ");
+    res += ("angle = " + QString::number(qRadiansToDegrees(qAtan(y/x))) + ", ");
+    res += ("vx = " + QString::number(ax * t) + ", ");
+    res += ("vy = " + QString::number(ay * t));
+    qDebug() << res;
+    return res;
 }
 
 /////////////////////////////////////////////////////
@@ -118,14 +129,12 @@ void OpenglWidget::stopAnimation() {
 void OpenglWidget::change_parameters() {
     t += 0.001;
     angle = qAtan(y / x);
-    double ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
-    double ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+    ax = (g * qTan(angle)) / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
+    ay = g / ( (1 + m1 * m2) * (1 + m1 * qTan(angle)) );
     x += ((ax * t * t) / 2);
     y -= ((ay * t * t) / 2);
-    qDebug() << ax << " " << ay << " " << x << " " << y << " " << t;
     if (y <= 0) {
         y = 0;
-        t = 0;
         emit stop_timer();
     }
 }

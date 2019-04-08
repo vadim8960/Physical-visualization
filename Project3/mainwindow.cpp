@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     status_button = WAIT;
-    this->setFixedSize(764, 486);
+    this->setFixedSize(719, 511);
     simulation = new OpenglWidget;
     timer = new QTimer(this);
     timer->setSingleShot(false);
@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
             timer, &QTimer::stop);
     connect(timer, &QTimer::timeout,
             this, &MainWindow::start_timer);
+    connect(timer, &QTimer::timeout,
+            this, &MainWindow::show_params);
     connect(this, &MainWindow::status,
             simulation, &OpenglWidget::setStatusPainter);
 }
@@ -82,6 +84,10 @@ void MainWindow::on_btn_start_clicked() {
 
 void MainWindow::start_timer() {
     emit status(ANIMATION);
+}
+
+void MainWindow::show_params() {
+    ui->lbl_params->setText(simulation->getParams());
 }
 
 void MainWindow::on_btn_stop_clicked() {

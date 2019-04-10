@@ -45,6 +45,7 @@ void MainWindow::show_message(QString msg) {
 }
 
 bool MainWindow::check_is_empty() {
+    bool res1, res2, res3;
     return ui->lineEdit_m1->text().isEmpty() ||
            ui->lineEdit_m2->text().isEmpty() ||
            ui->lineEdit_angle->text().isEmpty();

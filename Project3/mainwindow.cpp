@@ -15,12 +15,16 @@ MainWindow::MainWindow(QWidget *parent) :
     simulation->setFixedSize(380, 380);
     ui->grlayout->addWidget(simulation);
     simulation->setStatusPainter(DRAW_MAIN);
+
     connect(simulation, &OpenglWidget::stop_timer,
             timer, &QTimer::stop);
+
     connect(timer, &QTimer::timeout,
             this, &MainWindow::start_timer);
+
     connect(timer, &QTimer::timeout,
             this, &MainWindow::show_params);
+
     connect(this, &MainWindow::status,
             simulation, &OpenglWidget::setStatusPainter);
 }

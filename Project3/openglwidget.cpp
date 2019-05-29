@@ -136,5 +136,5 @@ void OpenglWidget::change_parameters() {
     if (y <= 0) {
         y = 0;
         emit stop_timer();
-    }
+  }
 }

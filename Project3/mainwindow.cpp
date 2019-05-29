@@ -45,10 +45,36 @@ void MainWindow::show_message(QString msg) {
 }
 
 bool MainWindow::check_is_empty() {
-    bool res1, res2, res3;
-    return ui->lineEdit_m1->text().isEmpty() ||
-           ui->lineEdit_m2->text().isEmpty() ||
-           ui->lineEdit_angle->text().isEmpty();
+    QString s1 = ui->lineEdit_m1->text();
+    QString s2 = ui->lineEdit_m2->text();
+    QString s3 = ui->lineEdit_angle->text();
+    for (unsigned iter = 0; iter < s1.size(); ++iter) {
+        if (!(48 <= s1[iter] && s1[iter] <= 57) && s1[iter] != 46) {
+            show_message(QString("Please, enter a value without chars"));
+            return true;
+        }
+    }
+    for (unsigned iter = 0; iter < s2.size(); ++iter) {
+        if (!(48 <= s2[iter] && s2[iter] <= 57) && s2[iter] != 46) {
+            show_message(QString("Please, enter a value without chars"));
+            return true;
+        }
+    }
+    for (unsigned iter = 0; iter < s3.size(); ++iter) {
+        if (!(48 <= s3[iter] && s3[iter] <= 57) && s3[iter] != 46) {
+            show_message(QString("Please, enter a value without chars"));
+            return true;
+        }
+    }
+    qDebug() << "Fick";
+    if (ui->lineEdit_m1->text().isEmpty() ||
+        ui->lineEdit_m2->text().isEmpty() ||
+        ui->lineEdit_angle->text().isEmpty())
+    {
+        show_message(QString("Please, enter all variable"));
+        return true;
+    }
+    return false;
 }
 
 /////////////////////////////////////////////////////
@@ -57,7 +83,7 @@ bool MainWindow::check_is_empty() {
 
 void MainWindow::on_btn_show_clicked() {
     if (check_is_empty()) {
-        show_message(QString("Please, enter all variable"));
+
     } else {
         bool res = simulation->setParams(ui->lineEdit_m1->text().toDouble(),
                                          ui->lineEdit_m1->text().toDouble(),
@@ -72,7 +98,7 @@ void MainWindow::on_btn_show_clicked() {
 
 void MainWindow::on_btn_start_clicked() {
     if (check_is_empty()) {
-        show_message(QString("Please, enter all variable"));
+
     } else {
         bool res = simulation->setParams(ui->lineEdit_m1->text().toDouble(),
                                          ui->lineEdit_m1->text().toDouble(),
